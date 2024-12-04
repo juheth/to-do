@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func ConnectionDB() (*gorm.DB, error) {
+func ConnectionBD() (*gorm.DB, error) {
 	_ = godotenv.Load()
 
 	user := os.Getenv("DATABASE_USER")
@@ -25,6 +25,7 @@ func ConnectionDB() (*gorm.DB, error) {
 		port,
 		name)
 
+	fmt.Println(dsn)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
