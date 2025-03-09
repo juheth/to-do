@@ -48,3 +48,21 @@ func (repo *repo) GetUserByMail(email string) (models.User, error) {
 	}
 	return user, nil
 }
+
+func (repo *repo) GetUserById(id string) (models.User, error) {
+	user := models.User{}
+	err := repo.db.Where("id = ?", id).First(&user).Error
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (repo *repo) UpdateUser(user *models.User) error {
+	err := repo.db.Save(user).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+

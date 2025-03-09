@@ -1,5 +1,2 @@
-.gitignore
-go.mod
-go.sum
-README.
 .env
+.gitignore
