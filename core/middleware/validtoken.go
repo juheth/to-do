@@ -7,9 +7,8 @@ import (
 	"github.com/juheth/to-do/core/jwt"
 )
 
-// ValidToken middleware to check if the token is valid
 func ValidToken(c *gin.Context) {
-	// Get token from Authorization header
+
 	token := c.GetHeader("Authorization")
 	if len(token) == 0 {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"status": 400, "message": "Token Requerido"})
@@ -17,7 +16,6 @@ func ValidToken(c *gin.Context) {
 		return
 	}
 
-	// Validate token using JWT
 	isValidToken, err := jwt.Token(token)
 	if !isValidToken {
 		if err != nil {
@@ -31,6 +29,5 @@ func ValidToken(c *gin.Context) {
 		}
 	}
 
-	// If token is valid, continue with the next handler
 	c.Next()
 }
